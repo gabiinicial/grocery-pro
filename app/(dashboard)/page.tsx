@@ -1,8 +1,24 @@
+"use client";
 import Image from "next/image";
 import { EllipsisVertical } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true); // Marca el componente como montado
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      router.replace("/login");
+    }
+  }, [mounted, router]);
+
   const lists = [
     { title: "Compra para limpieza", tag: "limpieza" },
     { title: "Compra para limpieza", tag: "limpieza" },
