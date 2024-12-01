@@ -3,21 +3,21 @@ import Image from "next/image";
 import { EllipsisVertical } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true); // Marca el componente como montado
-  }, []);
+    // Verificar si el usuario está autenticado
+    const isAuthenticated = localStorage.getItem("auth") === "true";
+    console.log(isAuthenticated);
 
-  useEffect(() => {
-    if (mounted) {
+    if (!isAuthenticated) {
+      // Redirigir a /login si no está autenticado
       router.replace("/login");
     }
-  }, [mounted, router]);
+  }, [router]);
 
   const lists = [
     { title: "Compra para limpieza", tag: "limpieza" },

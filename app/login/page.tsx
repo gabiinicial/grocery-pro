@@ -1,10 +1,28 @@
 // import Image from "next/image";
-
+"use client";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 // app/login/page.tsx
 export default function Login() {
+  const router = useRouter();
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Aquí deberías reemplazar con la lógica de autenticación real
+    const isAuthenticated = true;
+
+    if (isAuthenticated) {
+      // Guardar el estado de autenticación
+      localStorage.setItem("auth", "true");
+      // Redirigir a la página de inicio
+      router.push("/");
+    } else {
+      alert("Credenciales incorrectas");
+    }
+  };
+
   return (
     <div className="flex min-h-screen p-7">
       {/* Izquierda: Formulario de inicio de sesión */}
@@ -49,14 +67,13 @@ export default function Login() {
             />
           </div>
           <div>
-            <Link className="w-full" href="/">
-              <button
-                type="submit"
-                className="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition"
-              >
-                Iniciar Sesión
-              </button>
-            </Link>
+            <button
+              type="button"
+              onClick={handleLogin}
+              className="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition"
+            >
+              Iniciar Sesión
+            </button>
           </div>
         </form>
 
